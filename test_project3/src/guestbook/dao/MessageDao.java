@@ -74,14 +74,43 @@ public class MessageDao {
 		}
 	}
 	
-	public List<Message> selectList(Connection conn, int firstRow, int endRow) throws SQLException{
+	public List<Message> selectList(Connection conn, int firstRow, int endRow) 
+			throws SQLException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"select * from guestbook_message"
-					)
-		}
+					"select * from guestbook_message "+
+				    "order by message_id desc limit ?,?");
+			pstmt.setInt(1, firstRow - 1);
+			pstmt.setInt(2, endRow - firstRow + 1);
+			rs = pstmt.executeQuery();
 		
+			if(rs.next()) {
+				List<Message> messageList = new ArrayList<Message>();
+				do {
+					messageList.add(makeMessageFromResultSet(rs));
+				} while(rs.next());
+				retrun messageList;
+			} else {
+				retrun Collections.emptyList();
+			}
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(parmr);	
+		}
 	}
+	
+	public int delete (Connection conn, int messageId) throws SQLException {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatment(
+				"delete from guestbook_message where message_id = ?");
+				pstmt.setInt(1, messageId);
+				return pstmt.executeUpdate();
+				
+			} finally {
+				JdbcUtil.close(pstmt);
+			}
+		}
 }
