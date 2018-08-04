@@ -79,6 +79,7 @@ public class MessageDao {
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(
+					"select * from guestbook_message"
 					)
 		}
 		
