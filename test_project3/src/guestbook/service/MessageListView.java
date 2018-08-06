@@ -39,8 +39,26 @@ public class MessageListView {
 	public int getMessageTotalCount() {
 	   return messageTotalCount;
 	}
+	public int getCurrentPageNumber() {
+	   return currentPageNumber;	
+	}
 	
-	
-	
-
+	public List<Message> getMessageList() {
+	   return messageList;
+	}
+	public int getPageTotalCount() {
+	   return pageTotalCount;
+	}
+	public int getMessageCountPerPage() {
+	   return messageCountPerPage;
+	}
+	public int getFirstRow() {
+	   return firstRow;
+	}
+	public int getEndRow() {
+	   return endRow;
+	}
+	public boolean isEmpty() {
+           return messageTotalCount == 0;
+	}
 }
