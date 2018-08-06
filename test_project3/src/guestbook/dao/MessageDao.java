@@ -91,20 +91,20 @@ public class MessageDao {
 				do {
 					messageList.add(makeMessageFromResultSet(rs));
 				} while(rs.next());
-				retrun messageList;
+				return messageList;
 			} else {
-				retrun Collections.emptyList();
+				return Collections.emptyList();
 			}
 		} finally {
 			JdbcUtil.close(rs);
-			JdbcUtil.close(parmr);	
+			JdbcUtil.close(pstmt);	
 		}
 	}
 	
 	public int delete (Connection conn, int messageId) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatment(
+			pstmt = conn.prepareStatement(
 				"delete from guestbook_message where message_id = ?");
 				pstmt.setInt(1, messageId);
 				return pstmt.executeUpdate();
