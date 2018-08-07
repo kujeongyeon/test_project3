@@ -14,12 +14,12 @@ public class MessageListView {
 	private int endRow; //끝행
 	
 	public MessageListView(List<Message> messageList, int messageTotalCount,
-			int currentPageNumber, int messageCountPerPage) {
+			int currentPageNumber, int messageCountPerPage, int startRow, int endRow) {
 		this.messageList = messageList;
 		this.messageTotalCount = messageTotalCount;
 		this.currentPageNumber = currentPageNumber;
 		this.messageCountPerPage = messageCountPerPage;
-		this.firstRow = firstRow;
+		this.firstRow = startRow;
 		this.endRow = endRow;
 		
 		calculatePageTotalCount();

@@ -22,8 +22,8 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(
-					"insert into guestbook_message"+
-					"guest_name, password, message) values(?,?,?)");
+					"insert into guestbook_message "+
+					"(guest_name, password, message) values(?,?,?)");
 			pstmt.setString(1, message.getGuestName());
 			pstmt.setString(2, message.getPassword());
 			pstmt.setString(3, message.getMessage());

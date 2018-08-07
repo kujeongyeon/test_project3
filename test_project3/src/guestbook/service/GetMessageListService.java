@@ -5,8 +5,8 @@ import java.util.*;
 
 import guestbook.dao.MessageDao;
 import guestbook.model.Message;
+import jdbc.ConnectionProvider;
 import jdbc.JdbcUtil;
-import jdbc.connection.ConnectionPorovider;
 
 public class GetMessageListService {
   private static GetMessageListService instance = new GetMessageListService();
@@ -41,7 +41,13 @@ public class GetMessageListService {
         currentPageNumber = 0;
         messageList = Collections.emptyList();
       }
-      return new MessageListView(messageList, messageTotalCount, currentPageNumber)
+      return new MessageListView(messageList, messageTotalCount, 
+    		  currentPageNumber, MESSAGE_COUNT_PER_PAGE, firstRow, endRow);
+      
+    } catch (SQLException e) {
+    	throw new ServiceException("목록 구하기 실패:" + e.getMessage(), e);
+    } finally {
+    	JdbcUtil.close(conn);
     }
   }
 }
