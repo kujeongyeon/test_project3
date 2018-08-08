@@ -36,7 +36,7 @@
 <c:if test="${viewData.isEmpty()}">
 등록된 메시지가 없습니다
 </c:if>
-
+	${viewData.getFirstRow()}
 <c:if test="${!viewData.isEmpty()}">
 <table border="1">
 	<c:forEach var="message" items="${viewData.messageList}">

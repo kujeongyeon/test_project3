@@ -4,7 +4,7 @@
 
 <%
   int messageId = Integer.parseInt(request.getParameter("messageId"));
-  String password = request.getParamter("password");
+  String password = request.getParameter("password");
   boolean invalidPassword = false;
   try {
     DeleteMessageService deleteSerivce = DeleteMessageService.getInstance();
